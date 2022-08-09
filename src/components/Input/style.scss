@@ -1,0 +1,108 @@
+$spacers: (
+  small: 24px,
+  default: 32px,
+  large: 40px
+) !default;
+$input-padding:4px;
+$input-border-radius: 4px;
+$input-border-padding: 4px;
+$input-border-color: #ccc;
+
+@mixin border-radius($direction, $radius: 4px) {
+  border-#{$direction}: none;
+  border-bottom-#{$direction}-radius: $radius;
+  border-top-#{$direction}-radius: $radius;
+}
+
+@mixin center() {
+  display: inline-flex;
+  align-items: center;
+}
+
+// 全局的input 样式
+.input {
+  @include center();
+  justify-content: center;
+  // 重置input标签的默认样式
+  input {
+    appearance: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+  }
+  // prefix
+  .input-wrapper {
+    @include center();
+    position: relative;
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    padding: $input-padding;
+  }
+
+  // size
+  @each $key, $value in $spacers {
+    &.input-#{$key} {
+      .input-wrapper {
+        height: $value;
+      }
+
+      .addon {
+        height: $value;
+      }
+    }
+  }
+
+    // addon
+  .addon {
+    padding: 0 $input-border-padding;
+    border: 1px solid $input-border-color;
+    @include center();
+    &.before {
+      border-top-left-radius: $input-border-radius;
+      border-bottom-left-radius: $input-border-radius;
+    }
+    &.after {
+      border-top-right-radius: $input-border-radius;
+      border-bottom-right-radius: $input-border-radius;
+    }
+  }
+  &.input-before {
+    input {
+      @include border-radius('left', 0);
+    }
+  }
+  &.input-after {
+    input {
+      @include border-radius('right', 0);
+    }
+  }
+
+  .prefix,
+  .suffix {
+    @include center();
+  }
+
+    //disabled
+    &.disabled{
+      cursor: not-allowed;
+      background-color: #f5f5f5;
+      box-shadow: none;
+      input{
+        cursor: not-allowed;
+        background: none;
+      }
+    }
+    &.allow-clear{
+      cursor: pointer;
+      .icons{
+        margin-right: 4px;
+        width: 18px;
+      }
+    }
+}
+
+
+
+
+
