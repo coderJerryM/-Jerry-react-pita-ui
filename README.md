@@ -2,4 +2,4 @@
 
 A UI component library that supports React + Typescript
 
-image.png
+![alt](https:///public/img/readme.png)
